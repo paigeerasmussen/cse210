@@ -1,6 +1,8 @@
 using System;
 using System.Data;
 
+// The program exceeds requirements by displaying a goodbye message when 5 is selected, 
+// and sending an error message if a number that is not 1-5 is selected.
 class Program
 {
     static void Main(string[] args)
