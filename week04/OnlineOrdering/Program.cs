@@ -17,9 +17,9 @@ class Program
         o1.AddProduct(p12);
         o1.AddProduct(p13);
 
-        Console.WriteLine(o1.PackagingLabel());
+        Console.WriteLine($"Ship To:\n{o1.ShippingLabel()}\n");
+        Console.WriteLine($"Items:\n{o1.PackagingLabel()}");
         Console.WriteLine($"Total Price: ${o1.TotalPrice():0.00}");
-        Console.WriteLine(o1.ShippingLabel());
         Console.WriteLine();
 
         Address a2 = new Address("456 Street", "London", "SW1A", "United Kingdom");
@@ -33,9 +33,9 @@ class Program
         o2.AddProduct(p22);
         o2.AddProduct(p23);
 
-        Console.WriteLine(o2.PackagingLabel());
+        Console.WriteLine($"Ship To:\n{o2.ShippingLabel()}\n");
+        Console.WriteLine($"Items:\n{o2.PackagingLabel()}");
         Console.WriteLine($"Total Price: ${o2.TotalPrice():0.00}");
-        Console.WriteLine(o2.ShippingLabel());
         Console.WriteLine();
     }
 }
