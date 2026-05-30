@@ -48,7 +48,6 @@ class Order
         }
         return label;
     }
-
     public string ShippingLabel()
     {
         return _customer.GetDisplayText();

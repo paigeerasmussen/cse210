@@ -2,8 +2,6 @@ using System;
 
 class Comment
 {
-    // Tracks commentors name and the comment text
-
     private string _commenter;
     private string _comment;
 
@@ -15,8 +13,6 @@ class Comment
 
     public string GetDisplayText()
     {
-        string commentInfo = $"{_commenter}: {_comment}";
-
-        return commentInfo;
+        return $"{_commenter} said \"{_comment}\"";
     }
 }
