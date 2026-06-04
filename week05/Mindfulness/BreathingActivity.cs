@@ -2,18 +2,32 @@ using System;
 
 class BreathingActivity : Activity
 {
-// Show series of alternation messages between breathe in and breate out, pause and show countdown between each message
-// Continue until specified time has been reached and conclude
-
-public BreathingActivity(string name, string description, string duration) : base(name, description, duration)
+    public BreathingActivity()
+     : base(
+            "Breathing Activity",
+        "This activity will help you relax by walking your through breathing in and out slowly. Clear your mind and focus on your breathing.")
     {
-        name = "Breathing Activity";
-        description = "This activity will help you relax by walking your through breathing in and out slowly. Clear your mind and focus on your breathing.";
-        // finish
+
     }
 
-public void Run()
+    public void Run()
     {
-        // finish
+        DisplayStartMessage();
+
+        DateTime startTime = DateTime.Now;
+        DateTime endTime = startTime.AddSeconds(_duration);
+
+        while (DateTime.Now < endTime)
+        {
+            Console.Write("\nBreath in...");
+            ShowCountDown(5);
+
+            Console.Write("\nNow breath out...");
+            ShowCountDown(5);
+
+            Console.WriteLine();
+        }
+
+        DisplayEndMessage();
     }
 }

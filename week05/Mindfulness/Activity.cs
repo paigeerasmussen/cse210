@@ -2,37 +2,60 @@ using System;
 
 class Activity
 {
-    // Provides activity name, description, and asks for duration in seconds. Then tells the user to begin and pause for several seconds
-    // Ends with message saying good job, pause and then tell them the activity they have completed and the length of time, pause for several seconds before finishing
-    // Show user animation whenever application pauses
-
     private string _name;
     private string _description;
-    private string _duration;
+    protected int _duration;
 
-    public Activity(string name, string description, string duration)
+    public Activity(string name, string description)
     {
         _name = name;
         _description = description;
-        _duration = duration;
     }
     public void DisplayStartMessage()
     {
-        string startMessage = $"Welcome to the {_name} Activity\n\n{_description}\n\nHow long, in seconds, would you like for your session?";
+        Console.Clear();
+        Console.Write($"\nWelcome to the {_name}.\n\n{_description}\n\nHow long, in seconds, would you like for your session? ");
+        _duration = int.Parse(Console.ReadLine());
+
+        Console.Clear();
+        Console.WriteLine("\nGet Ready...");
+        ShowSpinner(3);
+        Console.WriteLine();
     }
 
     public void DisplayEndMessage()
     {
-        string endMessage = $"You have completed {_duration} seconds of the {_name} activity";
+        Console.WriteLine("\nWell Done!");
+        ShowSpinner(3);
+        Console.WriteLine($"\nYou have completed {_duration} seconds of the {_name} activity.");
+        ShowSpinner(3);
+        Console.Clear();
     }
 
     public void ShowSpinner(int seconds)
     {
-        // finish
-    }
+        List<string> spinner = ["|", "/", "-", "\\", "|", "/", "-", "\\",];
 
+        DateTime startTime = DateTime.Now;
+        DateTime endTime = startTime.AddSeconds(seconds);
+
+        while (DateTime.Now < endTime)
+        {
+            foreach (string s in spinner)
+            {
+                Console.Write(s);
+                Thread.Sleep(250);
+                Console.Write("\b \b");
+            }
+        }
+    }
     public void ShowCountDown(int seconds)
     {
-        // finish
+        for (int i = seconds; i > 0; i--)
+        {
+            Console.Write(i);
+            Thread.Sleep(1000);
+            Console.Write("\b \b");
+        }
     }
 }

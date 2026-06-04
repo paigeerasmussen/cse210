@@ -1,37 +1,52 @@
 using System;
-using System.Runtime.CompilerServices;
-
+using System.Security.Cryptography;
 class ListingActivity : Activity
 {
-    // Show a random prompt
-    // Give countdown of several seconds then prompt to keep listing items
-    // Continue until specified time has been reached, display number of items entered and conclude
-
     private int _count;
     private List<string> _prompts = ["Who are people that you appreciate?", "What are personal strengths of yours?", "Who are people that you have helped this week?", "When have you felt the Holy Ghost this month", "Who are some of your personal heroes?"];
-    public ListingActivity(string name, string description, string duration, int count, List<string> prompts) : base(name, description, duration)
+    public ListingActivity() : base("Listing Activity", "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.")
     {
-        _prompts = prompts;
-        _count = count;
-        name = "Listing Activity";
-        description = "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.";
-        // finish
+
     }
 
     public void Run()
     {
-        // finish
+        DisplayStartMessage();
+
+        Console.WriteLine("List as many responses you can to the following prompt:\n");
+        GetRandomPrompt();
+        Console.Write("You may begin in: ");
+        ShowCountDown(5);
+
+        Console.WriteLine();
+        List<string> responses = GetListFromUser();
+        _count = responses.Count;
+        Console.WriteLine($"You listed {_count} items!");
+
+        DisplayEndMessage();
     }
 
     public void GetRandomPrompt()
     {
-        // finish
+        int index = RandomNumberGenerator.GetInt32(_prompts.Count);
+        string prompt = _prompts[index];
+        Console.WriteLine($"--- {prompt} ---");
     }
 
     public List<string> GetListFromUser()
     {
-        return _prompts;
-        // finish and return user list instead
-    }
+        List<string> responses = new List<string>();
+        DateTime startTime = DateTime.Now;
+        DateTime endTime = startTime.AddSeconds(_duration);
 
+        while (DateTime.Now < endTime)
+        {
+            Console.Write("> ");
+            string input = Console.ReadLine();
+
+            responses.Add(input);
+        }
+
+        return responses;
+    }
 }
