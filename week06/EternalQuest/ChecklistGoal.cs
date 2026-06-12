@@ -1,32 +1,45 @@
 using System;
+using System.Formats.Tar;
 
 public class ChecklistGoal : Goal
 {
-    int _amountCompleted;
-    int _target;
-    int _bonus;
+    private int _amountCompleted;
+    private int _target;
+    private int _bonus;
+
     public ChecklistGoal(string name, string description, string points, int target, int bonus) : base(name, description, points)
     {
+        _amountCompleted = 0;
         _target = target;
         _bonus = bonus;
     }
     public override void RecordEvent()
     {
+        _amountCompleted++;
 
     }
 
     public override bool IsComplete()
     {
-        return true;
+        return _amountCompleted >= _target;
     }
 
     public override string GetDetailsString()
     {
-        return "123";
+        string status = "";
+        if (IsComplete())
+        {
+            status = "[X]";
+        }
+        else
+        {
+            status = "[ ]";
+        }
+        return $"{status} {_shortName} ({_description}) -- Currently completed {_amountCompleted}/{_target}";
     }
 
     public override string GetStringRepresentation()
     {
-        return $"SimpleGoal:{_shortName},{_description},{_points},{_bonus},{_target},{_amountCompleted}";
+        return $"ChecklistGoal,{_shortName},{_description},{_points},{_bonus},{_target},{_amountCompleted}";
     }
 }

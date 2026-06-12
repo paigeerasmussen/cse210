@@ -8,16 +8,15 @@ public class EternalGoal : Goal
     }
     public override void RecordEvent()
     {
-
     }
 
     public override bool IsComplete()
     {
-        return true;
+        return false;
     }
 
     public override string GetStringRepresentation()
     {
-        return $"SimpleGoal:{_shortName},{_description},{_points}";
+        return $"EternalGoal,{_shortName},{_description},{_points}";
     }
 }

@@ -14,18 +14,25 @@ public abstract class Goal
     }
 
     public abstract void RecordEvent();
-    // do whatever is necessary for each kind of goal and return point value associated with recording the event including bonuses
-
-
     public abstract bool IsComplete();
-    // return if the goal is completed, different for each type of goal
-
     public virtual string GetDetailsString()
     {
-        // returns details of a goal that could be shown ina list including checkbox, short name, and description. For the Checklist goal it should be overriden to show number of times the goal has been accomplished
-        return "details";
+        string status = "";
+        if (IsComplete())
+        {
+            status = "[X]";
+        }
+        else
+        {
+            status = "[ ]";
+        }
+        return $"{status} {_shortName} ({_description})";
     }
 
     public abstract string GetStringRepresentation();
-    // Provide all details of the goal in an easy to save and load way
+
+    public string GetNames()
+    {
+        return _shortName;
+    }
 }
